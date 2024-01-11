@@ -8,8 +8,12 @@
 
 /* Tipografía */
 @font-face {
-  font-family: "";
-  src: url("") format("woff2"), url("") format("woff");
+  font-family: 'noto_sansregular';
+  src: url('../font/notosans-regular-webfont.woff2') format('woff2'),
+       url('../font/notosans-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
 }
 
 /* ******************************** */
