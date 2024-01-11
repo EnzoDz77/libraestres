@@ -19,5 +19,14 @@
 /* ******************************** */
 
 /* Colores */
-
+:root {
+  --color-btn: #216692;
+  --color-cruz-off: #afddd2;
+  --color-header-footer: #5ab5da;
+  --color-main: #d5ecf6;
+  --color-text-animacion: #08be80;
+  --color-text-btn: #fafafa;
+  --color-text-inf: #da9f5a;
+  --color-texto: #082125;
+}
 /* ******************************** */
