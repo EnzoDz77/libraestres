@@ -40,7 +40,7 @@
     <!-- Código de las plataformas de Análisis -->
     <script></script>
     <!-- Scripts a cargar antes de la renderización -->
-    <script src="preloader.js"></script>
+    <script src="/js/contado.js"></script>
   </head>
   <body>
     <div id="container">
@@ -53,9 +53,14 @@
       <!-- Main (centro de la página, zona central) -->
       <main>
         <!-- section y article (posibilidades dentro de main) -->
-        <div class="cruz"></div>
-        <button class="boton-inicar">Iniciar</button>
-        <button class="boton-info">Info</button>
+        <section class="main_cruz">
+        <div class="cruz">
+        <a class="contador" id="cuenta-atras">3</a>
+        </div>
+        <button id="btn-control" class="boton-inicar">INICIAR</button>
+        <button class="boton-info">INFO</button>
+        <div id="minutos">5:00</div>
+        </section>
       </main>
       <!-- Footer (final de la página, zona inferior) -->
       <footer>

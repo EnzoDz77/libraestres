@@ -30,7 +30,14 @@
   --color-texto: #082125;
 }
 /* ******************************** */
-
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  width: 100vw;
+  height: 100vh;
+}
 /* Header */
 header{
   background-color: var(--color-header-footer);
@@ -38,6 +45,7 @@ header{
   align-items: center;
   justify-content: center;
   font-family: 'noto_sansregular';
+  width: 100%;
 }
 
 
@@ -45,13 +53,18 @@ header{
 main{
   background-color: var(--color-main);
   display: flex;
+  width: 100%;
+  margin: 0;
+  height: 65vh;
+}
+.main_cruz{
+  display: flex;
   align-items: center;
   justify-content: center;
   
-  margin: 0;
 }
+
 .cruz {
-  
   position: relative;
   width: 100px;
   height: 100px;
@@ -80,8 +93,26 @@ main{
   border-radius: 10%;
 }
 
-
-
+.boton-inicar,.boton-info{
+    background-color: var(--color-btn);
+    padding: 8px 16px;
+    margin: 4px;
+    font-size: 14px;
+    border-radius: 10%;
+    color: var(--color-text-btn);
+    font-family: '';
+}
+.contador {
+  font-family: 'noto_sansregular';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  color: var(--color-btn);
+  font-weight: bold;
+  z-index: 1; /* Asegura que el contador esté por encima de la cruz */
+}
 
 /* Footer */
 .text__footer{
@@ -92,6 +123,7 @@ main{
   text-align: left;
   font-size: 16px;
   gap: 10px;
+  height: 21vh;
 }
 
 .img_footer{
