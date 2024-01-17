@@ -53,6 +53,8 @@ header{
 main{
   background-color: var(--color-main);
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   margin: 0;
   height: 65vh;
@@ -83,8 +85,15 @@ main{
   left: 31%; /* Ajusta la posición de la línea vertical */
   top: 0;
   border-radius: 10%;
+  transition: background-color 0.5s;
 }
 
+.cruz.iluminado::before {
+  background-color: red; /* Nuevo color para iluminar */
+}
+.cruz.iluminado-horizontal::after {
+  background-color: red; /* Nuevo color para iluminar horizontalmente */
+}
 .cruz::after {
   width: 100%;
   height: 40px; /* Ajusta el grosor de la línea horizontal */
@@ -114,7 +123,24 @@ main{
   z-index: 1; /* Asegura que el contador esté por encima de la cruz */
 }
 
+.inhalo-texto {
+  font-family: 'noto_sansregular';
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-text-animacion);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Asegura que el texto esté por encima de la cruz */
+}
+
 /* Footer */
+footer{
+  
+  width: 100%;
+  
+}
 .text__footer{
   font-family: 'noto_sansregular';
   display: flex;
@@ -124,6 +150,7 @@ main{
   font-size: 16px;
   gap: 10px;
   height: 21vh;
+  
 }
 
 .img_footer{
