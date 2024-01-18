@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let countdownValue;
   let countdownInterval;
-  let animationInterval;
-  let inhaloTextoElement; // Variable para almacenar la referencia al elemento de texto
+  let isAnimating = false;
+
+  // Secuencia de instrucciones
+  const instructions = ['INHALAR', 'MANTENLO', 'EXHALAR', 'MANTENLO'];
+  let instructionIndex = 0;
 
   function updateCountdownFromThree() {
     if (countdownValue > 0) {
@@ -15,15 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
       countdownValue--;
     } else {
       clearInterval(countdownInterval);
+      countdownElement.textContent = ''; // Dejar el espacio en blanco para las instrucciones
       startAnimationsAndCountdown(); // Iniciar las animaciones y el contador de minutos al llegar a 1
     }
   }
 
   function startAnimationsAndCountdown() {
-    inhaloTextoElement = createInhaloTextoElement(); // Crear el elemento de texto
-    document.body.appendChild(inhaloTextoElement); // Agregar el elemento de texto al cuerpo del documento
-    cruzElement.classList.add('iluminado-horizontal'); // Iniciar con iluminación horizontal
-    animationInterval = setInterval(animateCross, 8000); // Alternar las animaciones cada 8 segundos
+    isAnimating = true;
+    animateCross(); // Iniciar la animación de la cruz
 
     let timeInSeconds = 5 * 60;
 
@@ -38,28 +40,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (timeInSeconds < 0) {
         clearInterval(countdownInterval);
-        clearInterval(animationInterval); // Detener el intervalo de animación al llegar a 0
-        removeInhaloTextoElement(); // Eliminar el elemento de texto
         minutesElement.textContent = 'Tiempo terminado';
         controlButton.textContent = 'INICIAR';
         controlButton.removeEventListener('click', stopCountdown);
         controlButton.addEventListener('click', startCountdownFromThree);
-        cruzElement.classList.remove('iluminado', 'iluminado-horizontal'); // Quitamos ambas clases al llegar a 0
+        cruzElement.classList.remove('iluminado', 'iluminado-horizontal', 'iluminado-vertical'); // Quitamos todas las clases al llegar a 0
+        countdownElement.textContent = '3'; // Restablecer el contenido del contador
+        isAnimating = false;
       }
     }, 1000);
   }
 
   function animateCross() {
-    cruzElement.classList.toggle('iluminado'); // Alternar la clase iluminado
-    cruzElement.classList.toggle('iluminado-horizontal'); // Alternar la clase iluminado-horizontal
+    if (!isAnimating) {
+      return;
+    }
+
+    // Obtener la siguiente instrucción
+    const currentInstruction = instructions[instructionIndex];
+
+    // Mostrar la instrucción actual en el contador
+    countdownElement.textContent = currentInstruction;
+
+    // Verificar la instrucción actual y aplicar las clases correspondientes
+    if (currentInstruction === 'INHALAR') {
+      cruzElement.classList.add('iluminado-horizontal');
+      cruzElement.classList.remove('iluminado-vertical');
+    } else if (currentInstruction === 'MANTENLO') {
+      cruzElement.classList.remove('iluminado-horizontal');
+      cruzElement.classList.add('iluminado-vertical');
+    } else if (currentInstruction === 'EXHALAR') {
+      cruzElement.classList.add('iluminado-horizontal');
+      cruzElement.classList.remove('iluminado-vertical');
+    }
+
+    // Incrementar el índice solo cuando la cruz está en posición horizontal
+    if (cruzElement.classList.contains('iluminado-horizontal')) {
+      instructionIndex = (instructionIndex + 1) % instructions.length;
+    }
+
+    // Establecer un intervalo para la siguiente animación
+    setTimeout(() => {
+      animateCross();
+    }, 4000); // Cambiar cada 4 segundos
   }
 
   function startCountdownFromThree() {
-    clearInterval(animationInterval); // Detener el intervalo de animación al reiniciar el contador
-    removeInhaloTextoElement(); // Eliminar el elemento de texto al reiniciar el contador
-    cruzElement.classList.remove('iluminado', 'iluminado-horizontal'); // Quitamos ambas clases al reiniciar el contador
+    cruzElement.classList.remove('iluminado', 'iluminado-horizontal', 'iluminado-vertical'); // Quitamos todas las clases al reiniciar el contador
     countdownValue = 3;
     countdownElement.textContent = countdownValue;
+    instructionIndex = 0; // Reiniciar el índice de instrucciones
 
     controlButton.textContent = 'DETENER';
     controlButton.removeEventListener('click', startCountdownFromThree);
@@ -69,32 +99,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function stopCountdown() {
     clearInterval(countdownInterval);
-    clearInterval(animationInterval); // Detener el intervalo de animación al detener el contador
-    removeInhaloTextoElement(); // Eliminar el elemento de texto al detener el contador
+    isAnimating = false; // Establecer la variable de animación a false
+    instructionIndex = 0; // Reiniciar el índice de instrucciones
+
+    // Restablecer el contador y eliminar el texto de instrucciones
     countdownElement.textContent = '3';
+
     minutesElement.textContent = '5:00';
-    cruzElement.classList.remove('iluminado', 'iluminado-horizontal'); // Quitamos ambas clases al detener el contador
     controlButton.textContent = 'INICIAR';
     controlButton.removeEventListener('click', stopCountdown);
     controlButton.addEventListener('click', startCountdownFromThree);
-  }
-
-  function createInhaloTextoElement() {
-    const element = document.createElement('p');
-    element.className = 'inhalo-texto';
-    element.id = 'inhaloTexto';
-    element.textContent = 'INHALAR';
-    return element;
-  }
-
-  function removeInhaloTextoElement() {
-    if (inhaloTextoElement && inhaloTextoElement.parentNode) {
-      inhaloTextoElement.parentNode.removeChild(inhaloTextoElement);
-    }
+    cruzElement.classList.remove('iluminado', 'iluminado-horizontal', 'iluminado-vertical'); // Quitamos todas las clases al detener el contador
   }
 
   controlButton.addEventListener('click', startCountdownFromThree);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

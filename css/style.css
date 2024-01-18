@@ -88,7 +88,7 @@ main{
   transition: background-color 0.5s;
 }
 
-.cruz.iluminado::before {
+.cruz.iluminado-vertical::before {
   background-color: red; /* Nuevo color para iluminar */
 }
 .cruz.iluminado-horizontal::after {
@@ -123,17 +123,7 @@ main{
   z-index: 1; /* Asegura que el contador esté por encima de la cruz */
 }
 
-.inhalo-texto {
-  font-family: 'noto_sansregular';
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--color-text-animacion);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1; /* Asegura que el texto esté por encima de la cruz */
-}
+
 
 /* Footer */
 footer{
