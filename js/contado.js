@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let isAnimating = false;
 
   // Secuencia de instrucciones
-  const instructions = ['INHALAR', 'MANTENLO', 'EXHALAR', 'MANTENLO'];
+  const instructions = ['Inhalar', 'Manténlo', 'Exhalar', 'Manténlo'];
   let instructionIndex = 0;
 
   function updateCountdownFromThree() {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (timeInSeconds < 0) {
         clearInterval(countdownInterval);
-        minutesElement.textContent = 'Tiempo terminado';
+        minutesElement.textContent = '00:00';
         controlButton.textContent = 'INICIAR';
         controlButton.removeEventListener('click', stopCountdown);
         controlButton.addEventListener('click', startCountdownFromThree);
@@ -55,35 +55,32 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!isAnimating) {
       return;
     }
-
+  
     // Obtener la siguiente instrucción
     const currentInstruction = instructions[instructionIndex];
-
+  
     // Mostrar la instrucción actual en el contador
     countdownElement.textContent = currentInstruction;
-
+  
+    // Limpiar clases anteriores
+    cruzElement.classList.remove('iluminado-horizontal', 'iluminado-vertical');
+  
     // Verificar la instrucción actual y aplicar las clases correspondientes
-    if (currentInstruction === 'INHALAR') {
+    if (currentInstruction === 'Inhalar' || currentInstruction === 'Exhalar') {
       cruzElement.classList.add('iluminado-horizontal');
-      cruzElement.classList.remove('iluminado-vertical');
-    } else if (currentInstruction === 'MANTENLO') {
-      cruzElement.classList.remove('iluminado-horizontal');
+    } else if (currentInstruction === 'Manténlo') {
       cruzElement.classList.add('iluminado-vertical');
-    } else if (currentInstruction === 'EXHALAR') {
-      cruzElement.classList.add('iluminado-horizontal');
-      cruzElement.classList.remove('iluminado-vertical');
     }
-
-    // Incrementar el índice solo cuando la cruz está en posición horizontal
-    if (cruzElement.classList.contains('iluminado-horizontal')) {
-      instructionIndex = (instructionIndex + 1) % instructions.length;
-    }
-
+  
+    // Incrementar el índice
+    instructionIndex = (instructionIndex + 1) % instructions.length;
+  
     // Establecer un intervalo para la siguiente animación
     setTimeout(() => {
       animateCross();
     }, 4000); // Cambiar cada 4 segundos
   }
+  
 
   function startCountdownFromThree() {
     cruzElement.classList.remove('iluminado', 'iluminado-horizontal', 'iluminado-vertical'); // Quitamos todas las clases al reiniciar el contador

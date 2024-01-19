@@ -50,6 +50,7 @@ header{
 
 
 /* Main */
+
 main{
   background-color: var(--color-main);
   display: flex;
@@ -58,6 +59,7 @@ main{
   width: 100%;
   margin: 0;
   height: 65vh;
+  padding: 20px;
 }
 .main_cruz{
   display: flex;
@@ -68,39 +70,42 @@ main{
 
 .cruz {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 180px; /* Tamaño del ancho de la cruz */
+  height: 180px; /* Tamaño la altura de la cruz */
 }
 
 .cruz::before,
 .cruz::after {
   content: '';
   position: absolute;
-  background-color:var(--color-cruz-off);
+  background-color: var(--color-cruz-off);
 }
 
 .cruz::before {
-  width: 40px; /* Ajusta el grosor de la línea vertical */
+  width: 60px; /* Grosor de la línea vertical */
   height: 100%;
-  left: 31%; /* Ajusta la posición de la línea vertical */
+  left: 33%; /* Posición de la línea vertical */
   top: 0;
   border-radius: 10%;
   transition: background-color 0.5s;
 }
 
 .cruz.iluminado-vertical::before {
-  background-color: red; /* Nuevo color para iluminar */
+  background-color: var(--color-text-animacion); /* Iluminación de cruz */
 }
+
 .cruz.iluminado-horizontal::after {
-  background-color: red; /* Nuevo color para iluminar horizontalmente */
+  background-color:var(--color-text-animacion); /* Iluminación de cruz */
 }
+
 .cruz::after {
   width: 100%;
-  height: 40px; /* Ajusta el grosor de la línea horizontal */
-  top: 31%; /* Ajusta la posición de la línea horizontal */
+  height: 60px; /* Grosor de la línea horizontal */
+  top: 35%; /* Posición de la línea horizontal */
   left: 0;
   border-radius: 10%;
 }
+
 
 .boton-inicar,.boton-info{
     background-color: var(--color-btn);
@@ -117,13 +122,32 @@ main{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 32px;
+  font-size: 34px;
   color: var(--color-btn);
   font-weight: bold;
-  z-index: 1; /* Asegura que el contador esté por encima de la cruz */
+  z-index: 1; /* Contador encima de la cruz */
 }
 
+/* Texto de info.html */
+.texto_info{
+  
+  font-family: 'noto_sansregular';
+  & h1{
+    padding: 20px;
+    color: var(--color-text-inf);
+  }
 
+  & h2{
+    color: var(--color-text-inf);
+  }
+  & h3{
+    color: var(--color-text-inf);
+  }
+}
+.img_info{
+  display: flex;
+  width: 30%;
+}
 
 /* Footer */
 footer{
@@ -140,7 +164,7 @@ footer{
   font-size: 16px;
   gap: 10px;
   height: 21vh;
-  
+  padding: 20px;
 }
 
 .img_footer{
